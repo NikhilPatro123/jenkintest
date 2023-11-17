@@ -38,10 +38,6 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
-            steps {
-                // Add deployment steps here
-            }
-        }
+        
     }
 }
