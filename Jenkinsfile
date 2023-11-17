@@ -1,44 +1,30 @@
 pipeline {
     agent any
-    
+
+    tools {
+        // Install the Maven version configured as "M3" and add it to the path.
+        maven "maven"
+    }
+
     stages {
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
-
-        stage('Install Dependencies') {
+         stage('Build') {
             steps {
-                script {
-                    nodejs('nodejs') {
-                        sh 'npm install'
-                    }
-                }
+                sh "npm run build"
+                
             }
         }
-
-        stage('Build') {
+        stage('test') {
             steps {
-                script {
-                    nodejs('nodejs') {
-                        sh 'npm run build'
-                    }
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    nodejs('nodejs') {
-                        sh 'npm test'
-                    }
-                }
+                sh "npm test"
+                
             }
         }
 
         
     }
 }
-
